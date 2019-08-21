@@ -7,10 +7,14 @@
 # to be the same before and after calling your method.
 
 def ele_replace!(array, hash)
-    arr_copy = array.map(&:clone)
-    (0...array.length).each do |i|
-        array[i] = hash[arr_copy[i]] if hash.key?(arr_copy[i])
+    array.map! do |ele|
+        if hash.has_key?(ele)
+            hash[ele]
+        else
+            ele
+        end
     end
+
     array
 end
 
